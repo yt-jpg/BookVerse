@@ -41,24 +41,25 @@
 - Node.js 16+
 - Python 3.8+
 - MongoDB ou MySQL
-- Redis (opcional, para cache)
 
-### Instalação Rápida
+### Instalação
 
 ```bash
 # Clonar repositório
-git clone https://github.com/seu-usuario/bookverse.git
-cd bookverse
+git clone https://github.com/yt-jpg/BookVerse.git
+cd BookVerse
 
 # Instalar dependências
-npm run install-all
+npm install
+cd client && npm install && cd ..
 
 # Configurar ambiente
 cp .env.example .env
-# Edite o arquivo .env com suas configurações
+cp client/.env.example client/.env
+# Edite os arquivos .env com suas configurações
 
 # Iniciar desenvolvimento
-npm run full-dev
+npm run dev
 ```
 
 ### Scripts Disponíveis
@@ -66,34 +67,14 @@ npm run full-dev
 ```bash
 # Desenvolvimento
 npm run dev                 # Servidor de desenvolvimento
-npm run client             # Cliente React
-npm run full-dev           # Servidor + Cliente
+npm run start:optimized    # Servidor otimizado para produção
 
-# Produção
-npm run start:optimized    # Servidor otimizado
-npm run build:optimized    # Build de produção
-
-# Performance
-npm run performance        # Monitor de performance
-npm run lighthouse         # Auditoria Lighthouse
-python3 performance-monitor.py  # Monitor avançado
+# Build
+npm run build              # Build do cliente
+npm run build:optimized    # Build otimizado
 
 # Utilitários
 npm run create-admin       # Criar usuário admin
-npm run optimize          # Otimizar recursos
-```
-
-### Scripts Interativos
-
-**Windows:**
-```cmd
-start-performance.bat
-```
-
-**Linux/Mac:**
-```bash
-chmod +x start-performance.sh
-./start-performance.sh
 ```
 
 ## 📁 Estrutura do Projeto
@@ -169,16 +150,7 @@ REACT_APP_ANALYTICS_ENDPOINT=https://analytics.example.com
 
 ## 🚀 Deploy
 
-### Deploy Automático (VPS)
-
-```bash
-# Configurar deploy
-python3 deploy_vps.py
-
-# Seguir as instruções interativas
-```
-
-### Deploy Manual
+### Produção
 
 ```bash
 # Build de produção

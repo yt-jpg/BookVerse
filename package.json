@@ -8,18 +8,9 @@
     "start": "node server/server.js",
     "start:optimized": "node server/server-optimized.js",
     "dev": "nodemon server/server.js",
-    "dev:optimized": "nodemon server/server-optimized.js",
     "build": "cd client && npm run build",
-    "build:optimized": "cd client && npm run build:optimized && python3 optimize.py",
-    "create-admin": "node server/scripts/createAdmin.js",
-    "install-all": "npm install && cd client && npm install",
-    "optimize": "python3 optimize.py",
-    "performance": "python3 performance-monitor.py",
-    "monitor": "python3 manage.py monitor",
-    "client": "cd client && npm start",
-    "client:build": "cd client && npm run build:optimized",
-    "full-dev": "concurrently \"npm run dev:optimized\" \"npm run client\"",
-    "lighthouse": "cd client && npm run lighthouse"
+    "build:optimized": "cd client && npm run build:optimized",
+    "create-admin": "node server/scripts/createAdmin.js"
   },
   "dependencies": {
     "axios": "^1.5.0",
