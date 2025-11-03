@@ -351,6 +351,12 @@ def main():
     # Verificar se é root
     if os.geteuid() == 0:
         print_error("Não execute este script como root. Use um usuário com sudo.")
+        print_info("📋 Siga estas etapas:")
+        print_info("1. Execute como root: ./setup-user.sh")
+        print_info("2. Faça login: su - bookverse")
+        print_info("3. Execute: ./deploy-bookverse.sh")
+        print_info("4. OU consulte: DEPLOY-VPS.md")
+        print_info("5. OU use: python3 deploy_vps.py (como usuário não-root)")
         sys.exit(1)
     
     # Obter informações do usuário
