@@ -152,11 +152,17 @@ export const withPerformanceTracking = (WrappedComponent, componentName) => {
   return function PerformanceTrackedComponent(props) {
     const startTime = performance.now();
     
-    React.useEffect(() => {
-      const loadTime = performance.now() - startTime;
-      trackCustomMetric(`component_mount_${componentName}`, loadTime);
-    }, []);
+    // Usar React apenas se disponível
+    if (typeof window !== 'undefined' && window.React) {
+      window.React.useEffect(() => {
+        const loadTime = performance.now() - startTime;
+        trackCustomMetric(`component_mount_${componentName}`, loadTime);
+      }, []);
+      
+      return window.React.createElement(WrappedComponent, props);
+    }
     
-    return React.createElement(WrappedComponent, props);
+    // Fallback sem React
+    return null;
   };
 };

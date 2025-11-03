@@ -6,7 +6,7 @@ import Logo from '../Logo/Logo';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import PasswordInput from '../PasswordInput/PasswordInput';
-import Captcha from '../Captcha/Captcha';
+
 
 import './Auth.css';
 
@@ -17,7 +17,7 @@ const Login = () => {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [captchaValid, setCaptchaValid] = useState(false);
+
 
   const { login } = useAuth();
   const { t } = useLanguage();
@@ -35,11 +35,7 @@ const Login = () => {
     setLoading(true);
     setError('');
 
-    if (!captchaValid) {
-      setError(t('completeCaptcha'));
-      setLoading(false);
-      return;
-    }
+
 
     const result = await login(formData.email, formData.password);
     
@@ -91,11 +87,7 @@ const Login = () => {
             label={t('password')}
           />
 
-          <Captcha 
-            onVerify={setCaptchaValid}
-            isValid={captchaValid}
-            setIsValid={setCaptchaValid}
-          />
+
 
           <div className="auth-options">
             <Link to="/forgot-password" className="forgot-link">
@@ -103,7 +95,7 @@ const Login = () => {
             </Link>
           </div>
 
-          <button type="submit" disabled={loading || !captchaValid} className="btn-primary auth-button">
+          <button type="submit" disabled={loading} className="btn-primary auth-button">
             {loading ? (
               <>
                 <span className="loading-spinner"></span>

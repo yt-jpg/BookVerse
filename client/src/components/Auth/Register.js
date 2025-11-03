@@ -7,7 +7,7 @@ import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import PasswordInput from '../PasswordInput/PasswordInput';
 import BackButton from '../BackButton/BackButton';
-import Captcha from '../Captcha/Captcha';
+
 import './Auth.css';
 
 const Register = () => {
@@ -19,7 +19,7 @@ const Register = () => {
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [captchaValid, setCaptchaValid] = useState(false);
+
 
   const { register } = useAuth();
   const { t } = useLanguage();
@@ -45,11 +45,7 @@ const Register = () => {
       return;
     }
 
-    if (!captchaValid) {
-      setError(t('completeCaptcha'));
-      setLoading(false);
-      return;
-    }
+
 
     try {
       const result = await register(formData.name, formData.email, formData.password);
@@ -127,13 +123,9 @@ const Register = () => {
             label={t('confirmPassword')}
           />
 
-          <Captcha 
-            onVerify={setCaptchaValid}
-            isValid={captchaValid}
-            setIsValid={setCaptchaValid}
-          />
 
-          <button type="submit" disabled={loading || !captchaValid} className="btn-primary auth-button">
+
+          <button type="submit" disabled={loading} className="btn-primary auth-button">
             {loading ? (
               <>
                 <span className="loading-spinner"></span>

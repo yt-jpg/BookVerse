@@ -6,7 +6,7 @@ import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import BackButton from '../BackButton/BackButton';
 import Modal from '../Modal/Modal';
-import Captcha from '../Captcha/Captcha';
+
 import axios from 'axios';
 import './Auth.css';
 
@@ -16,7 +16,7 @@ const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [modalType, setModalType] = useState('info');
-  const [captchaValid, setCaptchaValid] = useState(false);
+
   const { t } = useLanguage();
   const navigate = useNavigate();
 
@@ -25,11 +25,7 @@ const ForgotPassword = () => {
     setLoading(true);
     setMessage('');
 
-    if (!captchaValid) {
-      setMessage(t('completeCaptcha'));
-      setLoading(false);
-      return;
-    }
+
     
     try {
       const response = await axios.post('http://localhost:5000/api/auth/forgot-password', {
@@ -102,13 +98,9 @@ const ForgotPassword = () => {
               />
             </div>
 
-            <Captcha 
-              onVerify={setCaptchaValid}
-              isValid={captchaValid}
-              setIsValid={setCaptchaValid}
-            />
 
-            <button type="submit" disabled={loading || !captchaValid} className="btn-primary auth-button">
+
+            <button type="submit" disabled={loading} className="btn-primary auth-button">
               {loading ? (
                 <>
                   <span className="loading-spinner"></span>
