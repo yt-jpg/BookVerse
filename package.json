@@ -5,9 +5,9 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "node server/server.js",
+    "start": "node server/server-simple.js",
     "start:optimized": "node server/server-optimized.js",
-    "dev": "nodemon server/server.js",
+    "dev": "nodemon server/server-simple.js",
     "build": "cd client && npm run build",
     "build:optimized": "cd client && npm run build:optimized",
     "create-admin": "node server/scripts/createAdmin.js"

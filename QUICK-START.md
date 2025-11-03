@@ -43,7 +43,11 @@ python3 performance-monitor.py  # Monitor de performance
 ```env
 PORT=5000
 NODE_ENV=development
-MONGODB_URI=mongodb://localhost:27017/bookverse
+DB_TYPE=mysql
+DB_HOST=localhost
+DB_NAME=bookverse
+DB_USER=root
+DB_PASSWORD=
 JWT_SECRET=seu_jwt_secret_aqui
 ```
 
@@ -52,6 +56,22 @@ JWT_SECRET=seu_jwt_secret_aqui
 REACT_APP_API_URL=http://localhost:5000/api
 REACT_APP_SOCKET_URL=http://localhost:5000
 ```
+
+## 🗄️ Banco de Dados (Opcional)
+
+O projeto funciona sem banco, mas para funcionalidades completas:
+
+```bash
+# MySQL (recomendado)
+sudo apt install mysql-server
+sudo mysql -e "CREATE DATABASE bookverse;"
+
+# OU MongoDB
+sudo apt install mongodb
+sudo systemctl start mongodb
+```
+
+Ver: [DATABASE-SETUP.md](DATABASE-SETUP.md)
 
 ## 🎉 Resultado
 
