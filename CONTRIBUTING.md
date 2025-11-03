@@ -7,7 +7,7 @@ Obrigado por considerar contribuir para o BookVerse! Este documento fornece dire
 ### 1. Fork do Repositório
 ```bash
 # Fork no GitHub e clone seu fork
-git clone https://github.com/SEU_USUARIO/bookverse.git
+git clone https://github.com/yt-jpg/BookVerse
 cd bookverse
 ```
 

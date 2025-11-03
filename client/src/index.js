@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { initWebVitals } from './utils/webVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -11,5 +11,18 @@ root.render(
   </React.StrictMode>
 );
 
-// Performance monitoring
-reportWebVitals();
+// Inicializa monitoramento de Web Vitals
+initWebVitals();
+
+// Registra Service Worker em produção
+if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then((registration) => {
+        console.log('✅ SW registrado:', registration.scope);
+      })
+      .catch((error) => {
+        console.log('❌ SW falhou:', error);
+      });
+  });
+}

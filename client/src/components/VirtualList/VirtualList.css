@@ -1,0 +1,71 @@
+.virtual-list {
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  border: 1px solid var(--border-color, #ddd);
+  border-radius: 8px;
+  background: var(--background-primary, #fff);
+}
+
+.virtual-list-content {
+  position: relative;
+}
+
+.virtual-list-item {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border-light, #f0f0f0);
+  background: var(--background-primary, #fff);
+  transition: background-color 0.2s ease;
+}
+
+.virtual-list-item:hover {
+  background: var(--background-hover, #f8f9fa);
+}
+
+.virtual-list-item:last-child {
+  border-bottom: none;
+}
+
+/* Scrollbar personalizada */
+.virtual-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.virtual-list::-webkit-scrollbar-track {
+  background: var(--background-secondary, #f5f5f5);
+  border-radius: 4px;
+}
+
+.virtual-list::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb, #ccc);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.virtual-list::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover, #999);
+}
+
+/* Otimizações para performance */
+.virtual-list {
+  will-change: scroll-position;
+  transform: translateZ(0);
+}
+
+.virtual-list-item {
+  will-change: transform;
+  contain: layout style paint;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .virtual-list-item {
+    padding: 0 12px;
+  }
+  
+  .virtual-list::-webkit-scrollbar {
+    width: 6px;
+  }
+}

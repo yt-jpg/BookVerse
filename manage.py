@@ -219,12 +219,26 @@ def setup_pm2():
     print_success("Configuração PM2 criada: ecosystem.config.json")
     print_info("Para usar: pm2 start ecosystem.config.json")
 
+def monitor_app():
+    """Inicia monitor em tempo real"""
+    print_info("Iniciando monitor BookVerse...")
+    
+    try:
+        result = run_command("python3 monitor.py", capture=False)
+        return result and result.returncode == 0
+    except KeyboardInterrupt:
+        print_info("Monitor encerrado pelo usuário")
+        return True
+    except Exception as e:
+        print_error(f"Erro ao iniciar monitor: {e}")
+        return False
+
 def main():
     """Função principal"""
     parser = argparse.ArgumentParser(description='BookVerse - Gerenciador da Aplicação')
     parser.add_argument('action', choices=[
         'start', 'stop', 'restart', 'status', 'logs',
-        'install', 'build', 'create-admin', 'setup-pm2'
+        'install', 'build', 'create-admin', 'setup-pm2', 'monitor'
     ], help='Ação a ser executada')
     
     args = parser.parse_args()
@@ -258,6 +272,8 @@ def main():
         create_admin()
     elif args.action == 'setup-pm2':
         setup_pm2()
+    elif args.action == 'monitor':
+        monitor_app()
 
 if __name__ == "__main__":
     main()

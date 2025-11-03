@@ -18,8 +18,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:analyze": "npm run build && npx webpack-bundle-analyzer build/static/js/*.js",
+    "build:optimized": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lighthouse": "lighthouse http://localhost:3000 --output html --output-path ./lighthouse-report.html",
+    "performance": "npm run build:optimized && npm run lighthouse"
   },
   "eslintConfig": {
     "extends": [
@@ -47,6 +51,9 @@
   "devDependencies": {
     "@craco/craco": "^7.1.0",
     "@svgr/webpack": "^8.1.0",
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "webpack-bundle-analyzer": "^4.10.1",
+    "lighthouse": "^11.4.0",
+    "workbox-webpack-plugin": "^7.0.0"
   }
 }

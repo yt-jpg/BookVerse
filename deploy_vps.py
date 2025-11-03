@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-BookVerse - Deploy Automático para VPS
+BookVerse - Instalador Automático VPS
 Autor: BookVerse Team
-Versão: 1.0.0
+Versão: 2.0.0
 
-Este script automatiza completamente o deploy do BookVerse em VPS Ubuntu/Debian.
+Instalação completa com um clique para VPS Ubuntu/Debian.
+Instala e configura tudo automaticamente.
 """
 
 import os
@@ -13,6 +14,8 @@ import subprocess
 import json
 import secrets
 import string
+import time
+import urllib.request
 from pathlib import Path
 
 class Colors:

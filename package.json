@@ -6,14 +6,25 @@
   "main": "server.js",
   "scripts": {
     "start": "node server/server.js",
+    "start:optimized": "node server/server-optimized.js",
     "dev": "nodemon server/server.js",
+    "dev:optimized": "nodemon server/server-optimized.js",
     "build": "cd client && npm run build",
+    "build:optimized": "cd client && npm run build:optimized && python3 optimize.py",
     "create-admin": "node server/scripts/createAdmin.js",
-    "install-all": "npm install && cd client && npm install"
+    "install-all": "npm install && cd client && npm install",
+    "optimize": "python3 optimize.py",
+    "performance": "python3 performance-monitor.py",
+    "monitor": "python3 manage.py monitor",
+    "client": "cd client && npm start",
+    "client:build": "cd client && npm run build:optimized",
+    "full-dev": "concurrently \"npm run dev:optimized\" \"npm run client\"",
+    "lighthouse": "cd client && npm run lighthouse"
   },
   "dependencies": {
     "axios": "^1.5.0",
     "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
@@ -27,10 +38,19 @@
     "multer": "^1.4.5-lts.1",
     "mysql2": "^3.15.3",
     "sequelize": "^6.37.7",
-    "socket.io": "^4.8.1"
+    "socket.io": "^4.8.1",
+    "redis": "^4.6.0",
+    "ioredis": "^5.3.2",
+    "node-cache": "^5.1.2",
+    "express-slow-down": "^2.0.1",
+    "response-time": "^2.3.2"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
     "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
   }
 }
