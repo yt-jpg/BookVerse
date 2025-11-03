@@ -1,0 +1,82 @@
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  filter: drop-shadow(0 0 6px rgba(255, 193, 7, 0.4));
+  animation: backButtonGlow 2.8s ease-in-out infinite;
+}
+
+.back-button:hover {
+  background: var(--bg-tertiary);
+  border-color: #ffc107;
+  color: #ffc107;
+  transform: translateX(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+  animation: backButtonGlowHover 1.5s ease-in-out infinite;
+}
+
+.back-button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.back-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover .back-icon {
+  transform: translateX(-2px);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .back-button {
+    top: 0.5rem;
+    left: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .back-icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Animações da luz amarela */
+@keyframes backButtonGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(255, 193, 7, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.6)) drop-shadow(0 0 16px rgba(255, 193, 7, 0.3));
+  }
+}
+
+@keyframes backButtonGlowHover {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(255, 193, 7, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(255, 193, 7, 0.8)) drop-shadow(0 0 20px rgba(255, 193, 7, 0.4));
+  }
+}

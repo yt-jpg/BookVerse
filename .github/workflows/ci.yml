@@ -1,0 +1,109 @@
+name: CI/CD BookVerse
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    services:
+      mongodb:
+        image: mongo:6.0
+        ports:
+          - 27017:27017
+    
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Instalar dependências do backend
+      run: npm install
+    
+    - name: Instalar dependências do frontend
+      run: cd client && npm install
+    
+    - name: Verificar sintaxe Python
+      run: |
+        python -m py_compile deploy_vps.py
+        python -m py_compile start.py
+        python -m py_compile manage.py
+    
+    - name: Build do frontend
+      run: cd client && npm run build
+    
+    - name: Verificar se servidor inicia
+      run: |
+        cp .env.example .env
+        timeout 10s npm start || true
+      env:
+        MONGODB_URI: mongodb://localhost:27017/bookverse_test
+        JWT_SECRET: test_secret_key_for_ci
+        NODE_ENV: test
+
+  security:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Instalar dependências
+      run: npm install
+    
+    - name: Auditoria de segurança
+      run: npm audit --audit-level moderate
+    
+    - name: Verificar vulnerabilidades no frontend
+      run: cd client && npm audit --audit-level moderate
+
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout código
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Instalar dependências
+      run: |
+        npm install
+        cd client && npm install
+    
+    - name: Lint frontend
+      run: cd client && npm run lint || true
+    
+    - name: Verificar formatação Python
+      uses: psf/black@stable
+      with:
+        options: "--check --verbose"
+        src: "*.py"

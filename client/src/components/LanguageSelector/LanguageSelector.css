@@ -1,0 +1,321 @@
+.language-selector-wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.language-selector-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-primary);
+  font-weight: 500;
+  min-width: 90px;
+  justify-content: space-between;
+  height: 32px;
+  font-size: 0.85rem;
+}
+
+.language-selector-btn:hover {
+  border-color: #4169E1;
+  background: var(--bg-tertiary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(65, 105, 225, 0.2);
+}
+
+.language-selector-btn:hover .language-name {
+  background: linear-gradient(135deg, #4169E1, #6A5ACD, #4169E1);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: languageNameGlowHover 2s ease-in-out infinite;
+  filter: brightness(1.3) saturate(1.4);
+  text-shadow: 0 0 6px rgba(65, 105, 225, 0.4);
+}
+
+.language-selector-btn:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.language-flag {
+  width: 20px;
+  height: 15px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.language-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 15px;
+}
+
+.language-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  line-height: 15px;
+  margin: 0;
+  padding: 0;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.dropdown-arrow {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s ease;
+  color: var(--text-secondary);
+}
+
+.dropdown-arrow.open {
+  transform: rotate(180deg);
+}
+
+.language-selector-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.8;
+  cursor: default;
+  user-select: none;
+}
+
+.language-selector-wrapper:hover .language-selector-label {
+  opacity: 1;
+  background: linear-gradient(135deg, #4169E1, #1E3A8A, #4169E1);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: languageTextGlowHover 1.8s ease-in-out infinite;
+  text-shadow: 
+    0 0 8px rgba(65, 105, 225, 0.6),
+    0 0 16px rgba(65, 105, 225, 0.4),
+    0 0 24px rgba(65, 105, 225, 0.2);
+  filter: brightness(1.5) saturate(1.6);
+  transform: scale(1.05);
+}
+
+.language-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px var(--shadow-medium);
+  z-index: 1000;
+  min-width: 150px;
+  overflow: hidden;
+  animation: dropdownSlide 0.3s ease-out;
+}
+
+@keyframes dropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.language-option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-primary);
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+  justify-content: flex-start;
+  min-height: 44px;
+}
+
+.language-option:last-child {
+  border-bottom: none;
+}
+
+.language-option:hover {
+  background: var(--bg-tertiary);
+  color: var(--primary-color);
+}
+
+.language-option.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+}
+
+.language-option.active .option-flag {
+  filter: brightness(1.2);
+}
+
+.option-flag {
+  width: 20px;
+  height: 15px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+  display: block;
+}
+
+.option-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: 15px;
+  width: 100%;
+}
+
+.option-name {
+  font-weight: 500;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  line-height: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Efeito de brilho sutil */
+.language-selector-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+  border-radius: 10px;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.language-selector-wrapper:hover::before {
+  opacity: 0.1;
+}
+
+.language-selector-wrapper:hover {
+  animation: languageGlowHover 1.2s ease-in-out infinite;
+}
+
+/* Animações da luz azul */
+@keyframes languageGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(65, 105, 225, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(65, 105, 225, 0.6)) drop-shadow(0 0 16px rgba(65, 105, 225, 0.3));
+  }
+}
+
+@keyframes languageGlowHover {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(65, 105, 225, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(65, 105, 225, 0.8)) drop-shadow(0 0 20px rgba(65, 105, 225, 0.4));
+  }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .language-dropdown {
+    min-width: 130px;
+  }
+  
+  .language-option {
+    padding: 0.6rem 0.8rem;
+  }
+  
+  .option-name {
+    font-size: 0.9rem;
+  }
+  
+  .language-name {
+    font-size: 0.8rem;
+  }
+}
+
+/* Animações para texto do idioma */
+@keyframes languageTextGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+    filter: brightness(1.2) saturate(1.4);
+  }
+  25% {
+    background-position: 25% 0%;
+    filter: brightness(1.3) saturate(1.5);
+  }
+  50% {
+    background-position: 75% 100%;
+    filter: brightness(1.4) saturate(1.6);
+  }
+  75% {
+    background-position: 100% 50%;
+    filter: brightness(1.3) saturate(1.5);
+  }
+}
+
+@keyframes languageTextGlowHover {
+  0%, 100% {
+    background-position: 0% 50%;
+    filter: brightness(1.5) saturate(1.6);
+    transform: scale(1.05);
+  }
+  33% {
+    background-position: 50% 0%;
+    filter: brightness(1.6) saturate(1.7);
+    transform: scale(1.07);
+  }
+  66% {
+    background-position: 100% 50%;
+    filter: brightness(1.7) saturate(1.8);
+    transform: scale(1.08);
+  }
+}
+
+@keyframes languageNameGlow {
+  0%, 100% {
+    background-position: 0% 50%;
+    filter: brightness(1.1) saturate(1.2);
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: brightness(1.2) saturate(1.3);
+  }
+}
+
+@keyframes languageNameGlowHover {
+  0%, 100% {
+    background-position: 0% 50%;
+    filter: brightness(1.3) saturate(1.4);
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: brightness(1.4) saturate(1.5);
+  }
+}
