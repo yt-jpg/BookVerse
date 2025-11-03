@@ -6,6 +6,7 @@
 [![React](https://img.shields.io/badge/React-18+-blue.svg)](https://reactjs.org/)
 [![Performance](https://img.shields.io/badge/Lighthouse-90+-brightgreen.svg)](https://developers.google.com/web/tools/lighthouse)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![CI/CD](https://github.com/yt-jpg/BookVerse/workflows/🚀%20CI/CD%20Pipeline%20-%20BookVerse/badge.svg)](https://github.com/yt-jpg/BookVerse/actions)
 
 ## 🚀 Características Principais
 
