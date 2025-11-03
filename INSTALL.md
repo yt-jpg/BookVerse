@@ -1,5 +1,19 @@
 # 🚀 Instalação Automática - BookVerse
 
+## 🌐 Instalador Web Inteligente (Novo!)
+
+### ⭐ Método Mais Fácil - Detecção Automática
+```
+🔗 Acesse: https://bookverse-installer.netlify.app
+```
+
+**Funcionalidades:**
+- 🔍 **Detecção automática** da sua plataforma (Windows, macOS, Linux)
+- 🎯 **Configuração inteligente** baseada no seu sistema
+- 📱 **Interface responsiva** que funciona em qualquer dispositivo
+- 🛠️ **Scripts personalizados** gerados automaticamente
+- ⚙️ **Configuração manual** para usuários avançados
+
 ## ⚡ Instalação em 1 Comando
 
 ### Windows
@@ -12,6 +26,12 @@ curl -o install.bat https://raw.githubusercontent.com/yt-jpg/BookVerse/main/inst
 ```bash
 # Instalação automática
 curl -sSL https://raw.githubusercontent.com/yt-jpg/BookVerse/main/install.sh | bash
+```
+
+## 🎯 Setup Inteligente (Node.js)
+```bash
+# Detecção automática e configuração personalizada
+node setup.js
 ```
 
 ## 🎯 O que o Script Faz

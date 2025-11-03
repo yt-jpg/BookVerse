@@ -42,8 +42,36 @@
 - Python 3.8+
 - MongoDB ou MySQL
 
-### Instalação
+### 🚀 Instalação Inteligente
 
+#### 🌐 Método 1: Instalador Web (Recomendado)
+```bash
+# Iniciar instalador web com detecção automática
+npm run web-installer
+# Acesse: http://localhost:8080
+```
+**Funcionalidades:**
+- 🔍 Detecção automática de plataforma (Windows, macOS, Linux)
+- 🎯 Configuração inteligente baseada no seu sistema
+- 📱 Interface responsiva que funciona em qualquer dispositivo
+- 🛠️ Scripts personalizados gerados automaticamente
+
+#### 🎯 Método 2: Setup Inteligente
+```bash
+# Setup interativo com detecção automática
+node setup.js
+```
+
+#### ⚡ Método 3: Scripts Automáticos
+```bash
+# Linux/Mac
+curl -sSL https://raw.githubusercontent.com/yt-jpg/BookVerse/main/install.sh | bash
+
+# Windows (PowerShell como Administrador)
+curl -o install.bat https://raw.githubusercontent.com/yt-jpg/BookVerse/main/install.bat && install.bat
+```
+
+#### 🔧 Método 4: Manual
 ```bash
 # Clonar repositório
 git clone https://github.com/yt-jpg/BookVerse.git
@@ -62,11 +90,22 @@ cp client/.env.example client/.env
 npm run dev
 ```
 
+#### 🔍 Diagnóstico do Sistema
+```bash
+# Verificar configuração e dependências
+npm run diagnose
+```
+
 ### Scripts Disponíveis
 
 ```bash
+# Instalação e Configuração
+npm run setup              # Setup inteligente com detecção automática
+npm run diagnose           # Diagnóstico completo do sistema
+npm run web-installer      # Instalador web (http://localhost:8080)
+
 # Desenvolvimento
-npm run dev                 # Servidor de desenvolvimento
+npm run dev                # Servidor de desenvolvimento
 npm run start:optimized    # Servidor otimizado para produção
 
 # Build

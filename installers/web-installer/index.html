@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookVerse - Instalação Inteligente</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="../../client/public/favicon.ico">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1>📚 BookVerse</h1>
+                <p>Instalação Inteligente com Detecção Automática</p>
+            </div>
+        </header>
+
+        <main class="main">
+            <!-- Seção de Detecção -->
+            <section id="detection" class="section active">
+                <div class="card">
+                    <h2>🔍 Detectando sua Plataforma...</h2>
+                    <div class="loading">
+                        <div class="spinner"></div>
+                        <p>Analisando seu sistema...</p>
+                    </div>
+                    <div id="platform-info" class="platform-info hidden">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label">Sistema:</span>
+                                <span id="os-name" class="value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Arquitetura:</span>
+                                <span id="arch" class="value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Navegador:</span>
+                                <span id="browser" class="value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Resolução:</span>
+                                <span id="resolution" class="value">-</span>
+                            </div>
+                        </div>
+                        <button id="continue-btn" class="btn btn-primary">
+                            Continuar Instalação →
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Método de Instalação -->
+            <section id="method" class="section">
+                <div class="card">
+                    <h2>🚀 Escolha o Método de Instalação</h2>
+                    <div class="methods">
+                        <div class="method-card recommended" data-method="auto">
+                            <div class="method-header">
+                                <h3>🎯 Automática (Recomendado)</h3>
+                                <span class="badge">Mais Fácil</span>
+                            </div>
+                            <p>Detecta e instala tudo automaticamente baseado na sua plataforma</p>
+                            <ul>
+                                <li>✅ Detecção automática de dependências</li>
+                                <li>✅ Configuração otimizada</li>
+                                <li>✅ Scripts personalizados</li>
+                                <li>✅ Banco de dados sugerido</li>
+                            </ul>
+                        </div>
+
+                        <div class="method-card" data-method="manual">
+                            <div class="method-header">
+                                <h3>⚙️ Manual</h3>
+                                <span class="badge">Controle Total</span>
+                            </div>
+                            <p>Escolha cada componente e configuração manualmente</p>
+                            <ul>
+                                <li>🔧 Controle total das configurações</li>
+                                <li>🎛️ Escolha de componentes</li>
+                                <li>📝 Configuração personalizada</li>
+                                <li>🗄️ Seleção de banco de dados</li>
+                            </ul>
+                        </div>
+
+                        <div class="method-card" data-method="docker">
+                            <div class="method-header">
+                                <h3>🐳 Docker</h3>
+                                <span class="badge">Isolado</span>
+                            </div>
+                            <p>Instalação em containers Docker (requer Docker instalado)</p>
+                            <ul>
+                                <li>📦 Ambiente isolado</li>
+                                <li>🔄 Fácil de remover</li>
+                                <li>⚡ Configuração rápida</li>
+                                <li>🌐 Pronto para produção</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Configuração Automática -->
+            <section id="auto-config" class="section">
+                <div class="card">
+                    <h2>🎯 Configuração Automática</h2>
+                    <div id="auto-recommendations" class="recommendations">
+                        <!-- Preenchido dinamicamente -->
+                    </div>
+                    <div class="config-actions">
+                        <button id="customize-btn" class="btn btn-secondary">
+                            Personalizar Configurações
+                        </button>
+                        <button id="install-auto-btn" class="btn btn-primary">
+                            Instalar com Configurações Recomendadas
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Configuração Manual -->
+            <section id="manual-config" class="section">
+                <div class="card">
+                    <h2>⚙️ Configuração Manual</h2>
+                    
+                    <div class="config-group">
+                        <h3>📁 Diretório de Instalação</h3>
+                        <div class="input-group">
+                            <input type="text" id="install-dir" placeholder="Escolha o diretório...">
+                            <button id="browse-dir" class="btn btn-outline">Navegar</button>
+                        </div>
+                        <div id="dir-suggestions" class="suggestions">
+                            <!-- Preenchido dinamicamente -->
+                        </div>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>🗄️ Banco de Dados</h3>
+                        <div class="radio-group">
+                            <label class="radio-option">
+                                <input type="radio" name="database" value="mysql">
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <strong>MySQL</strong>
+                                    <p>Robusto e confiável para produção</p>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="database" value="mongodb">
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <strong>MongoDB</strong>
+                                    <p>Flexível e escalável (NoSQL)</p>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="database" value="sqlite">
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <strong>SQLite</strong>
+                                    <p>Simples e sem configuração</p>
+                                </div>
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="database" value="none">
+                                <span class="radio-custom"></span>
+                                <div class="radio-content">
+                                    <strong>Sem Banco</strong>
+                                    <p>Apenas para testes</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="config-group">
+                        <h3>🎛️ Funcionalidades Opcionais</h3>
+                        <div class="checkbox-group">
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="feature-performance" checked>
+                                <span class="checkbox-custom"></span>
+                                <div class="checkbox-content">
+                                    <strong>Monitor de Performance</strong>
+                                    <p>Monitoramento em tempo real</p>
+                                </div>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="feature-analytics">
+                                <span class="checkbox-custom"></span>
+                                <div class="checkbox-content">
+                                    <strong>Analytics</strong>
+                                    <p>Estatísticas de uso</p>
+                                </div>
+                            </label>
+                            <label class="checkbox-option">
+                                <input type="checkbox" id="feature-notifications" checked>
+                                <span class="checkbox-custom"></span>
+                                <div class="checkbox-content">
+                                    <strong>Notificações</strong>
+                                    <p>Sistema de notificações</p>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="config-actions">
+                        <button id="back-to-method" class="btn btn-secondary">
+                            ← Voltar
+                        </button>
+                        <button id="install-manual-btn" class="btn btn-primary">
+                            Instalar com Configurações Personalizadas
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Instalação -->
+            <section id="installation" class="section">
+                <div class="card">
+                    <h2>📦 Instalando BookVerse</h2>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div id="progress-fill" class="progress-fill"></div>
+                        </div>
+                        <div id="progress-text" class="progress-text">Preparando instalação...</div>
+                    </div>
+                    
+                    <div id="installation-steps" class="installation-steps">
+                        <!-- Preenchido dinamicamente -->
+                    </div>
+
+                    <div id="installation-log" class="installation-log">
+                        <div class="log-header">
+                            <h4>📋 Log de Instalação</h4>
+                            <button id="toggle-log" class="btn btn-small">Mostrar/Ocultar</button>
+                        </div>
+                        <div id="log-content" class="log-content hidden">
+                            <!-- Log em tempo real -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Sucesso -->
+            <section id="success" class="section">
+                <div class="card success-card">
+                    <div class="success-icon">🎉</div>
+                    <h2>Instalação Concluída com Sucesso!</h2>
+                    <p>O BookVerse foi instalado e configurado para sua plataforma.</p>
+                    
+                    <div class="success-info">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="label">📁 Localização:</span>
+                                <span id="final-location" class="value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">🗄️ Banco de Dados:</span>
+                                <span id="final-database" class="value">-</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">🌐 URL Local:</span>
+                                <span class="value">http://localhost:5000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="success-actions">
+                        <button id="start-server" class="btn btn-primary">
+                            🚀 Iniciar Servidor
+                        </button>
+                        <button id="open-folder" class="btn btn-secondary">
+                            📁 Abrir Pasta
+                        </button>
+                        <button id="view-docs" class="btn btn-outline">
+                            📚 Ver Documentação
+                        </button>
+                    </div>
+
+                    <div class="next-steps">
+                        <h3>📋 Próximos Passos:</h3>
+                        <ol>
+                            <li>Clique em "Iniciar Servidor" para executar o BookVerse</li>
+                            <li>Acesse <code>http://localhost:5000</code> no seu navegador</li>
+                            <li>Configure sua conta de administrador</li>
+                            <li>Comece a adicionar seus livros!</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>BookVerse © 2024 - Instalação Inteligente com Detecção Automática</p>
+        </footer>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="platform-detector.js"></script>
+    <script src="installer.js"></script>
+</body>
+</html>

@@ -14,7 +14,13 @@ const auth = function(req, res, next) {
     if (token.startsWith('dev_token_')) {
       // Token de desenvolvimento
       const userId = token.replace('dev_token_', '');
-      req.user = { id: userId, role: 'user' };
+      
+      // Verificar se é o usuário admin (ID = 1)
+      if (userId === '1') {
+        req.user = { id: userId, role: 'admin' };
+      } else {
+        req.user = { id: userId, role: 'user' };
+      }
       next();
     } else {
       // Token JWT normal

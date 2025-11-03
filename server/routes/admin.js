@@ -357,11 +357,46 @@ router.put('/books/:id/status', async (req, res) => {
 // Listar usuários
 router.get('/users', async (req, res) => {
   try {
-    const users = await User.find({ role: 'user' })
-      .select('-password')
-      .sort({ createdAt: -1 });
+    if (req.mongoConnected) {
+      // Modo MongoDB
+      const users = await User.find({ role: 'user' })
+        .select('-password')
+        .sort({ createdAt: -1 });
 
-    res.json(users);
+      res.json(users);
+    } else {
+      // Modo memória
+      const users = req.memoryDB.users.filter(u => u.role !== 'admin');
+      res.json(users);
+    }
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Erro do servidor');
+  }
+});
+
+// Limpar todas as contas de usuário (manter apenas admin)
+router.delete('/users/clear-all', async (req, res) => {
+  try {
+    if (req.mongoConnected) {
+      // Modo MongoDB
+      const result = await User.deleteMany({ role: 'user' });
+      res.json({ 
+        message: `${result.deletedCount} contas de usuário foram deletadas`,
+        deletedCount: result.deletedCount
+      });
+    } else {
+      // Modo memória
+      const initialCount = req.memoryDB.users.length;
+      req.memoryDB.users = req.memoryDB.users.filter(u => u.role === 'admin');
+      const deletedCount = initialCount - req.memoryDB.users.length;
+      
+      res.json({ 
+        message: `${deletedCount} contas de usuário foram deletadas`,
+        deletedCount: deletedCount,
+        remainingUsers: req.memoryDB.users.length
+      });
+    }
   } catch (error) {
     console.error(error.message);
     res.status(500).send('Erro do servidor');
